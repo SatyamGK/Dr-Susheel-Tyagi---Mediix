@@ -1,4 +1,11 @@
 // Central source for verified profile details, consultation information and site navigation.
+
+export type Publication = {
+  type: "Articles" | "Talks" | "Studies";
+  t: string;
+  m: string;
+};
+
 export const site = {
   name: "Dr. Susheel Tyagi",
   role: "Consultant Physician · Internal Medicine & Diabetes Care",
@@ -46,7 +53,8 @@ export const site = {
   ],
   affiliations: [],
   interests: [],
-  publications: [],
+  // publications: [],
+  publications: [] as Publication[],
   testimonials: [],
   faqs: [
     { q: "Which health concerns can I discuss during a consultation?", a: "Consultation areas include type 1 and type 2 diabetes, hypertension, obesity, metabolic health and adult internal medicine. The doctor will advise whether your concern is within the scope of the clinic." },

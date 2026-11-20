@@ -1,0 +1,38 @@
+"use strict";(()=>{var e={};e.id=301,e.ids=[301],e.modules={2934:e=>{e.exports=require("next/dist/client/components/action-async-storage.external.js")},4580:e=>{e.exports=require("next/dist/client/components/request-async-storage.external.js")},5869:e=>{e.exports=require("next/dist/client/components/static-generation-async-storage.external.js")},399:e=>{e.exports=require("next/dist/compiled/next-server/app-page.runtime.prod.js")},5315:e=>{e.exports=require("path")},7360:e=>{e.exports=require("url")},1094:(e,a,i)=>{i.r(a),i.d(a,{GlobalError:()=>n.a,__next_app__:()=>m,originalPathname:()=>h,pages:()=>c,routeModule:()=>p,tree:()=>d}),i(922),i(2204),i(2649),i(996);var t=i(170),r=i(5002),s=i(3876),n=i.n(s),o=i(6299),l={};for(let e in o)0>["default","tree","pages","GlobalError","originalPathname","__next_app__","routeModule"].indexOf(e)&&(l[e]=()=>o[e]);i.d(a,l);let d=["",{children:["about",{children:["__PAGE__",{},{page:[()=>Promise.resolve().then(i.bind(i,922)),"D:\\Dr Susheel Tyagi - Mediix\\app\\about\\page.tsx"]}]},{metadata:{icon:[async e=>(await Promise.resolve().then(i.bind(i,4697))).default(e)],apple:[],openGraph:[],twitter:[],manifest:void 0}}]},{layout:[()=>Promise.resolve().then(i.bind(i,2204)),"D:\\Dr Susheel Tyagi - Mediix\\app\\layout.tsx"],template:[()=>Promise.resolve().then(i.bind(i,2649)),"D:\\Dr Susheel Tyagi - Mediix\\app\\template.tsx"],"not-found":[()=>Promise.resolve().then(i.t.bind(i,996,23)),"next/dist/client/components/not-found-error"],metadata:{icon:[async e=>(await Promise.resolve().then(i.bind(i,4697))).default(e)],apple:[],openGraph:[],twitter:[],manifest:void 0}}],c=["D:\\Dr Susheel Tyagi - Mediix\\app\\about\\page.tsx"],h="/about/page",m={require:i,loadChunk:()=>Promise.resolve()},p=new t.AppPageRouteModule({definition:{kind:r.x.APP_PAGE,page:"/about/page",pathname:"/about",bundlePath:"",filename:"",appPaths:[]},userland:{loaderTree:d}})},922:(e,a,i)=>{i.r(a),i.d(a,{default:()=>r});var t=i(2051);function r(){return(0,t.jsxs)("main",{style:{backgroundColor:"#ffffff",color:"#071921",minHeight:"100vh"},children:[t.jsx("style",{children:`
+        .about-container {
+          max-width: 1180px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+        .about-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 24px;
+          margin-top: 36px;
+        }
+        @media (max-width: 768px) {
+          .about-cards-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .about-white-card {
+          background-color: #ffffff;
+          color: #071921;
+          border-radius: 18px;
+          padding: 28px 30px;
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+          border: 1px solid #e2e8f0;
+        }
+        .about-card-title {
+          margin: 0;
+          font-size: 1.32rem;
+          font-weight: 700;
+          color: #071921;
+        }
+        .about-card-desc {
+          margin: 10px 0 0;
+          font-size: 0.96rem;
+          line-height: 1.65;
+          color: #334155;
+        }
+      `}),t.jsx("section",{style:{backgroundColor:"#071921",color:"#ffffff",padding:"68px 0 76px"},children:(0,t.jsxs)("div",{className:"about-container",children:[(0,t.jsxs)("div",{style:{maxWidth:740},children:[t.jsx("h1",{style:{margin:0,fontSize:"2.15rem",fontWeight:700,lineHeight:1.25,color:"#ffffff"},children:"A strong foundation in medical education and clinical knowledge"}),t.jsx("p",{style:{margin:"14px 0 0",fontSize:"1.08rem",lineHeight:1.6,color:"#cbd5e1"},children:"Academic degrees and international fellowships supporting evidence-led adult care."})]}),(0,t.jsxs)("div",{className:"about-cards-grid",children:[(0,t.jsxs)("div",{className:"about-white-card",children:[t.jsx("h2",{className:"about-card-title",children:"MD – Internal Medicine"}),t.jsx("p",{className:"about-card-desc",children:"Postgraduate medical degree from King George's Medical University (KGMU), Lucknow."})]}),(0,t.jsxs)("div",{className:"about-white-card",children:[t.jsx("h2",{className:"about-card-title",children:"PG Diploma (UK)"}),t.jsx("p",{className:"about-card-desc",children:"Postgraduate Diploma from the Royal College of Physicians, United Kingdom."})]}),(0,t.jsxs)("div",{className:"about-white-card",children:[t.jsx("h2",{className:"about-card-title",children:"Fellow, ACP (USA)"}),t.jsx("p",{className:"about-card-desc",children:"Fellow of the American College of Physicians (FACP), recognising clinical excellence."})]}),(0,t.jsxs)("div",{className:"about-white-card",children:[t.jsx("h2",{className:"about-card-title",children:"FICP & FIACM"}),t.jsx("p",{className:"about-card-desc",children:"Fellow of the Indian College of Physicians and Indian Association of Clinical Medicine."})]})]})]})}),t.jsx("section",{style:{backgroundColor:"#0b222d",color:"#ffffff",padding:"68px 0 76px"},children:(0,t.jsxs)("div",{className:"about-container",children:[(0,t.jsxs)("div",{style:{maxWidth:740},children:[t.jsx("p",{style:{margin:0,fontSize:"0.9rem",fontWeight:700,letterSpacing:"0.06em",textTransform:"uppercase",color:"#34d399"},children:"Clinical Philosophy"}),t.jsx("h2",{style:{margin:"8px 0 0",fontSize:"2rem",fontWeight:700,color:"#ffffff"},children:"Areas of clinical interest & approach"})]}),(0,t.jsxs)("div",{className:"about-cards-grid",children:[(0,t.jsxs)("div",{className:"about-white-card",children:[t.jsx("h3",{className:"about-card-title",children:"Understanding the individual"}),t.jsx("p",{className:"about-card-desc",children:"Taking the time to understand medical history, symptoms, lifestyle, and relevant health factors."})]}),(0,t.jsxs)("div",{className:"about-white-card",children:[t.jsx("h3",{className:"about-card-title",children:"Evidence-based decisions"}),t.jsx("p",{className:"about-card-desc",children:"Using established medical knowledge, appropriate investigations, and clinical judgment to guide treatment decisions."})]}),(0,t.jsxs)("div",{className:"about-white-card",children:[t.jsx("h3",{className:"about-card-title",children:"Prevention and awareness"}),t.jsx("p",{className:"about-card-desc",children:"Encouraging individuals to understand their health, recognise risk factors, and take practical preventive measures."})]}),(0,t.jsxs)("div",{className:"about-white-card",children:[t.jsx("h3",{className:"about-card-title",children:"Continuity of care"}),t.jsx("p",{className:"about-card-desc",children:"Recognising that many health conditions require ongoing attention, follow-up, and adjustments to treatment over time."})]})]})]})}),t.jsx("section",{style:{backgroundColor:"#ffffff",color:"#071921",padding:"72px 0"},children:(0,t.jsxs)("div",{className:"about-container",children:[t.jsx("p",{style:{margin:0,fontSize:"0.95rem",fontWeight:700,color:"#0f9d76"},children:"Consultation"}),t.jsx("h2",{style:{margin:"8px 0 0",fontSize:"2.15rem",fontWeight:700,color:"#071921"},children:"Meet Dr. Susheel Tyagi at Mediix Clinic"}),t.jsx("p",{style:{margin:"14px 0 0",maxWidth:720,fontSize:"1.05rem",lineHeight:1.65,color:"#334155"},children:"Comprehensive consultation for diabetes, hypertension, metabolic health, and adult internal medicine in Indirapuram, Ghaziabad."})]})})]})}i(6269)},4697:(e,a,i)=>{i.r(a),i.d(a,{default:()=>r});var t=i(4564);let r=e=>[{type:"image/svg+xml",sizes:"any",url:(0,t.fillMetadataSegment)(".",e.params,"icon.svg")+"?2e8efd40366af678"}]}};var a=require("../../webpack-runtime.js");a.C(e);var i=e=>a(a.s=e),t=a.X(0,[379,435,564,8],()=>i(1094));module.exports=t})();

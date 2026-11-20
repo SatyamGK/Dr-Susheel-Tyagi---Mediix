@@ -1,4 +1,4 @@
-// File: C:\Users\Dell\Desktop\doctor-site-supabase-rate-limited\doctor-site\app\page.tsx
+// File: D:\Dr Susheel Tyagi - Mediix\app\page.tsx
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
