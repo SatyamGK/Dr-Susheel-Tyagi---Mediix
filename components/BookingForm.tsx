@@ -3,7 +3,7 @@ import { useState } from "react";
 import { site } from "@/content/site";
 import { locations } from "@/content/media";
 import Icon from "./Icon";
-import { LogoMark } from "./Logo";
+import Image from "next/image";
 type Errs = Record<string, string>;
 function Field({ id, label, icon, error, children }: { id: string; label: string; icon: string; error?: string; children: React.ReactNode }) {
   return (
@@ -48,7 +48,16 @@ export default function BookingForm({ onClose }: { onClose?: () => void }) {
     <div className="bk">
       <aside className="bk-side">
         <span className="bub b1" /><span className="bub b2" /><span className="bub b3" />
-        <LogoMark size={46} />
+        <div style={{ width: 156, maxWidth: "100%", marginBottom: 16 }}>
+          <Image
+            src="/susheel-tyagi-logo.png"
+            alt="ST Susheel Tyagi"
+            width={156}
+            height={104}
+            style={{ display: "block", width: "100%", height: "auto", objectFit: "contain" }}
+            priority
+          />
+        </div>
         <h2>Book your visit</h2>
         <p>Tell us a little about you and we will arrange your appointment with {site.name}.</p>
         <ul>
@@ -85,7 +94,7 @@ export default function BookingForm({ onClose }: { onClose?: () => void }) {
               <Field id="email" label="Email (optional)" icon="mail" error={errs.email}><input id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com" /></Field>
             </div>
             <Field id="service" label="Reason for visit" icon="stethoscope">
-              <select id="service" name="service">{site.conditions.map(c => <option key={c.t}>{c.t}</option>)}<option>Other / not sure</option></select>
+             <select id="service" name="service">{site.conditions.map(c => <option key={c.t}>{c.t}</option>)}<option>Other / not sure</option></select>
             </Field>
             <Field id="location" label="Preferred location" icon="pin">
               <select id="location" name="location">{locations.map(l => <option key={l.id}>{l.name}</option>)}</select>

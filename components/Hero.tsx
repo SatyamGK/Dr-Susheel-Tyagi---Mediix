@@ -82,11 +82,12 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="doctor-portrait-wrap">
-            <div className="portrait-orbit orbit-one" />
-            <div className="portrait-orbit orbit-two" />
+          <div className="doctor-portrait-wrap hero-portrait-integrated">
+            <div className="hero-portrait-aura" aria-hidden="true" />
+            <div className="portrait-orbit orbit-one" aria-hidden="true" />
+            <div className="portrait-orbit orbit-two" aria-hidden="true" />
             <img
-              className="doctor-portrait"
+              className="doctor-portrait hero-portrait-photo"
               src="/images/doctor.png"
               width={396}
               height={505}

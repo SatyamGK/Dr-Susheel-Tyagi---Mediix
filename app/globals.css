@@ -893,3 +893,179 @@ body{overflow-x:clip}.hdr a{text-decoration:none}
     width: 95px;
   }
 }
+
+.booking-brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 120px;
+  min-height: 80px;
+  margin-bottom: 12px;
+  background: transparent;
+}
+
+.booking-brand-logo img {
+  width: 110px;
+  height: auto;
+  max-height: 75px;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .booking-brand-logo img {
+    width: 90px;
+    max-height: 65px;
+  }
+}
+
+.hero-doctor-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 18px 35px rgba(0, 65, 70, 0.12));
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 75%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    black 75%,
+    transparent 100%
+  );
+}
+
+.hero-doctor-wrapper {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at 55% 70%,
+    rgba(52, 169, 160, 0.16),
+    transparent 68%
+  );
+}
+
+/* ============================================================
+   Mediix hero portrait integration – overrides only the hero.
+   Retains original scroll-trigger animations and video.
+   ============================================================ */
+.doctor-hero-scroll .doctor-hero-grid {
+  position: relative;
+  z-index: 2;
+}
+.doctor-hero-scroll .hero-portrait-integrated {
+  position: relative;
+  isolation: isolate;
+  align-self: stretch;
+  justify-self: center;
+  width: min(100%, 540px);
+  min-width: 0;
+  min-height: 440px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: visible;
+}
+.doctor-hero-scroll .hero-portrait-aura {
+  position: absolute;
+  z-index: -1;
+  left: 3%;
+  right: 3%;
+  bottom: 4%;
+  height: 83%;
+  border-radius: 50% 50% 30% 30%;
+  background: radial-gradient(ellipse at 50% 52%,
+    rgba(137, 236, 220, .38) 0%,
+    rgba(43, 177, 163, .18) 37%,
+    rgba(13, 73, 77, .09) 65%,
+    transparent 76%);
+  filter: blur(16px);
+  pointer-events: none;
+}
+.doctor-hero-scroll .hero-portrait-integrated .portrait-orbit {
+  z-index: -1;
+  inset: auto;
+  top: 11%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-color: rgba(129, 233, 216, .18);
+  animation: none;
+  pointer-events: none;
+}
+.doctor-hero-scroll .hero-portrait-integrated .orbit-one {
+  width: min(85%, 425px);
+}
+.doctor-hero-scroll .hero-portrait-integrated .orbit-two {
+  width: min(97%, 490px);
+  top: 5%;
+}
+.doctor-hero-scroll .hero-portrait-photo {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(100%, 490px);
+  max-width: 100%;
+  height: min(70vh, 610px);
+  min-height: 400px;
+  object-fit: contain;
+  object-position: center bottom;
+  /* Feather the original photo's background into the hero. */
+  -webkit-mask-image: radial-gradient(ellipse 69% 71% at 50% 48%,
+    #000 48%, rgba(0,0,0,.97) 64%,
+    rgba(0,0,0,.52) 81%, transparent 100%);
+  mask-image: radial-gradient(ellipse 69% 71% at 50% 48%,
+    #000 48%, rgba(0,0,0,.97) 64%,
+    rgba(0,0,0,.52) 81%, transparent 100%);
+  filter: drop-shadow(0 20px 28px rgba(2, 25, 35, .18));
+}
+.doctor-hero-scroll .hero-portrait-integrated .portrait-caption {
+  z-index: 3;
+  right: 0;
+  bottom: 3%;
+  max-width: 220px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,.65);
+  border-radius: 14px;
+  box-shadow: 0 14px 38px rgba(2, 24, 35, .2);
+}
+@media (min-width: 821px) and (max-height: 760px) {
+  .doctor-hero-scroll .hero-portrait-integrated { min-height: 360px; }
+  .doctor-hero-scroll .hero-portrait-photo {
+    height: min(65vh, 480px);
+    min-height: 340px;
+  }
+}
+@media (max-width: 820px) {
+  .doctor-hero-scroll .doctor-hero-grid { gap: .5rem; }
+  .doctor-hero-scroll .hero-portrait-integrated {
+    width: min(100%, 370px);
+    min-height: 0;
+    max-height: none;
+    margin: .35rem auto 0;
+  }
+  .doctor-hero-scroll .hero-portrait-photo {
+    width: min(100%, 350px);
+    height: clamp(245px, 37svh, 390px);
+    min-height: 0;
+  }
+  .doctor-hero-scroll .hero-portrait-aura { height: 95%; bottom: 0; }
+  .doctor-hero-scroll .hero-portrait-integrated .portrait-caption {
+    right: 0;
+    bottom: 0;
+    font-size: .68rem;
+    padding: .45rem .65rem;
+    max-width: 165px;
+  }
+}
+@media (max-width: 480px) {
+  .doctor-hero-scroll .hero-portrait-photo {
+    height: clamp(225px, 32svh, 320px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .doctor-hero-scroll .hero-portrait-photo,
+  .doctor-hero-scroll .hero-portrait-aura { animation: none !important; }
+}
