@@ -1,0 +1,17 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/career-milestones/page": "app/career-milestones/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/about/page": "app/about/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/icon.svg/route": "app/icon.svg/route.js",
+  "/publications-research/page": "app/publications-research/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/book/page": "app/book/page.js",
+  "/testimonials/page": "app/testimonials/page.js",
+  "/specialities/page": "app/specialities/page.js",
+  "/research-vision/page": "app/research-vision/page.js",
+  "/specialities/[slug]/page": "app/specialities/[slug]/page.js",
+  "/api/appointments/route": "app/api/appointments/route.js"
+}
