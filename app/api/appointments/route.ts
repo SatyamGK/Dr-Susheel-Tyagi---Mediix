@@ -17,106 +17,29 @@ function hash(value: string, salt: string) {
   return createHash("sha256").update(`${salt}:${value}`).digest("hex");
 }
 
-async function supabaseRequest(path: string, init: RequestInit = {}) {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "");
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+async function supabaseRequest(path: string, init: RequestInit = {}): Promise<Response> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim().replace(/\/+$/, "");
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
   if (!url || !key) throw new Error("supabase_not_configured");
 
-  return fetch(`${url}/rest/v1/${path}`, {
+  const headers = new Headers(init.headers);
+  headers.set("apikey", key);
+  headers.set("Content-Type", "application/json");
+
+  // Legacy service_role keys are JWTs. Modern sb_secret_ keys are API keys,
+  // not JWTs, so do not send them as Authorization: Bearer.
+  if (key.startsWith("eyJ")) {
+    headers.set("Authorization", `Bearer ${key}`);
+  } else {
+    headers.delete("Authorization");
+  }
+
+  return fetch(`${url}/rest/v1/${path.replace(/^\/+/, "")}`, {
     ...init,
-    headers: {
-      apikey: key,
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-      ...init.headers,
-    },
+    headers,
     cache: "no-store",
   });
 }
-
-// async function consumeLimit(keyHash: string, limit: number, windowSeconds: number) {
-//   const response = await supabaseRequest("rpc/consume_rate_limit", {
-//     method: "POST",
-//     body: JSON.stringify({
-//       p_key_hash: keyHash,
-//       p_limit: limit,
-//       p_window_seconds: windowSeconds,
-//     }),
-//   });
-
-//   if (!response.ok) {
-//     // Fail closed: do not accept new bookings if abuse protection is unavailable.
-//     console.error("Rate-limit service failed:", response.status);
-//     throw new Error("rate_limit_unavailable");
-//   }
-
-//   return (await response.json()) === true;
-// }
-
-
-// async function consumeLimit(
-//   keyHash: string,
-//   limit: number,
-//   windowSeconds: number
-// ) {
-//   const response = await supabaseRequest("rpc/consume_rate_limit", {
-//     method: "POST",
-//     body: JSON.stringify({
-//       p_key_hash: keyHash,
-//       p_limit: limit,
-//       p_window_seconds: windowSeconds,
-//     }),
-//   });
-
-//   if (!response.ok) {
-//     const detail = await response.text();
-
-//     console.error(
-//       "Rate-limit service failed:",
-//       response.status,
-//       detail
-//     );
-
-//     throw new Error("rate_limit_unavailable");
-//   }
-
-//   return (await response.json()) === true;
-// }
-
-
-// async function consumeLimit(
-//   keyHash: string,
-//   limit: number,
-//   windowSeconds: number
-// ): Promise<boolean> {
-//   const response = await supabaseRequest("rpc/consume_rate_limit", {
-//     method: "POST",
-//     body: JSON.stringify({
-//       p_key_hash: keyHash,
-//       p_limit: limit,
-//       p_window_seconds: windowSeconds,
-//     }),
-//   });
-
-//   const responseText = await response.text();
-
-//   if (!response.ok) {
-//     console.error("SUPABASE RATE LIMIT ERROR", {
-//       status: response.status,
-//       response: responseText.slice(0, 2000),
-//     });
-
-//     throw new Error("rate_limit_unavailable");
-//   }
-
-//   try {
-//     return JSON.parse(responseText) === true;
-//   } catch {
-//     console.error("Invalid rate-limit response:", responseText);
-//     throw new Error("rate_limit_invalid_response");
-//   }
-// }
-
 
 async function consumeLimit(
   keyHash: string,
@@ -133,24 +56,23 @@ async function consumeLimit(
   });
 
   const responseText = await response.text();
-
   if (!response.ok) {
     console.error("SUPABASE RATE LIMIT ERROR", {
       status: response.status,
-      response: responseText.slice(0, 2000),
+      response: responseText.slice(0, 1000),
     });
-
     throw new Error("rate_limit_unavailable");
   }
 
   try {
-    return JSON.parse(responseText) === true;
+    const value: unknown = JSON.parse(responseText);
+    if (typeof value === "boolean") return value;
   } catch {
-    console.error("Invalid rate-limit response:", responseText);
-    throw new Error("rate_limit_invalid_response");
+    // Handled below without exposing the response body to the client.
   }
+  console.error("Unexpected Supabase rate-limit response format");
+  throw new Error("rate_limit_unavailable");
 }
-
 
 export async function POST(req: Request) {
   const contentLength = Number(req.headers.get("content-length") || 0);
