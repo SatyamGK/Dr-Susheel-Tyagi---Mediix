@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import MotionDirector from "@/components/MotionDirector";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { BookingProvider } from "@/components/Booking";
@@ -35,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en"><body className={font.className}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
-      <BookingProvider><a href="#content" className="skip-link">Skip to content</a><Header /><main id="content">{children}</main><Footer /><WhatsAppButton /></BookingProvider>
+      <BookingProvider><a href="#content" className="skip-link">Skip to content</a><Header /><MotionDirector /><main id="content">{children}</main><Footer /><WhatsAppButton /></BookingProvider>
     </body></html>
   );
 }

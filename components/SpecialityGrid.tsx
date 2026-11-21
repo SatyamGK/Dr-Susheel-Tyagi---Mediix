@@ -17,9 +17,24 @@ export default function SpecialityGrid() {
     }, root);
     return () => ctx.revert();
   }, []);
-  return <div ref={root} className="speciality-cloud">
-    {site.conditions.map((c, i) => <Link className="speciality-pill" key={c.t} href={`/specialities/${slugify(c.t)}`}>
-      <span className="speciality-number">0{i + 1}</span><h2>{c.t}</h2><p>{c.d}</p><span className="speciality-more">Explore this speciality →</span>
+  const tilt = (e: React.PointerEvent<HTMLAnchorElement>) => {
+    if (e.pointerType === "touch") return;
+    const card = e.currentTarget;
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top) / r.height - .5;
+    card.style.setProperty("--tilt-x", `${(-y * 10).toFixed(1)}deg`);
+    card.style.setProperty("--tilt-y", `${(x * 12).toFixed(1)}deg`);
+    card.style.setProperty("--shine-x", `${((x + .5) * 100).toFixed(1)}%`);
+    card.style.setProperty("--shine-y", `${((y + .5) * 100).toFixed(1)}%`);
+  };
+  const untilt = (e: React.PointerEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.setProperty("--tilt-x", "0deg");
+    e.currentTarget.style.setProperty("--tilt-y", "0deg");
+  };
+  return <div ref={root} className="speciality-cloud cinema-speciality-grid">
+    {site.conditions.map((c, i) => <Link className="speciality-pill cinema-speciality" onPointerMove={tilt} onPointerLeave={untilt} key={c.t} href={`/specialities/${slugify(c.t)}`}>
+      <span className="cinema-card-inner"><span className="speciality-number">0{i + 1} / SPECIALITY</span><h2>{c.t}</h2><p>{c.d}</p><span className="speciality-more">Explore this speciality <span aria-hidden="true">↗</span></span></span>
     </Link>)}
   </div>;
 }
