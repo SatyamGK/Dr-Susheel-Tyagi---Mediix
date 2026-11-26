@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import SectionHead from "@/components/SectionHead";
 import BgSection from "@/components/BgSection";
+import ClinicalJourney from "@/components/ClinicalJourney";
 import Timeline from "@/components/Timeline";
 import Testimonials from "@/components/Testimonials";
 import LocationsBand from "@/components/LocationsBand";
@@ -17,16 +18,36 @@ export default function Home() {
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
     <Hero />
-    <BgSection tone="white" id="specialities" className="specialities-section">
-      <SectionHead kw="Specialities" title="Focused care for better health" sub="Consultation and ongoing management across common metabolic and medical conditions." />
+    <BgSection
+      tone="white"
+      id="specialities"
+      className="specialities-section"
+    >
+      <div className="sticky-section-title">
+        <h1 className="section-h1">
+          Specialities
+        </h1>
+      </div>
+
       <SpecialityGrid />
     </BgSection>
-    <BgSection bg="journey" tone="dark" id="journey" className="journey-section">
-      <SectionHead kw="Clinical Journey" title="A journey shaped by learning and practice" sub="Medical education, specialist training, professional fellowships and current clinical practice." />
-      <Timeline items={site.milestones} />
+    <BgSection
+      bg="journey"
+      tone="dark"
+      id="journey"
+      className="journey-section"
+    >
+      <div className="sticky-section-title">
+        <h1 className="section-h1">
+          Clinical Journey
+        </h1>
+      </div>
+
+      <ClinicalJourney />
     </BgSection>
     <LocationsBand />
     <BgSection bg="vision" tone="dark" id="research-vision" className="research-section">
+      <SectionHead kw="Research &amp; Vision" title="What problem are we solving?" />
       <ResearchPreview />
     </BgSection>
     <BgSection tone="white" narrow id="common-questions" className="home-faq-section">
@@ -38,7 +59,7 @@ export default function Home() {
       <AwardsCarousel />
     </BgSection>
     <BgSection bg="testimonials" tone="dark" id="testimonials" className="testimonials-section">
-      <h1 className="sr-only">Testimonials: patient experiences</h1>
+      <SectionHead kw="Testimonials" title="Patient experiences" />
       <Testimonials />
     </BgSection>
     <BgSection tone="white" id="about-dr-susheel" className="home-about-section">

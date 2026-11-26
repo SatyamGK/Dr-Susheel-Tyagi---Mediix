@@ -12,10 +12,16 @@ export default function SectionHead({
   type?: RevealType;
 }) {
   return (
-    <Reveal type={type} className="shead">
-      <h1 className="section-h1">{kw}</h1>
-      <h2 className="section-h2">{title}</h2>
-      {sub && <p className="sub">{sub}</p>}
-    </Reveal>
+    <>
+      <div className="sticky-section-title">
+        <h1 className="section-h1">{kw}</h1>
+      </div>
+
+      <Reveal type={type} className="shead">
+        <h2 className="section-h2">{title}</h2>
+
+        {sub && <p className="sub">{sub}</p>}
+      </Reveal>
+    </>
   );
 }

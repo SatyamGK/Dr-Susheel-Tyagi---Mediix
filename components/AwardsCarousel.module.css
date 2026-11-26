@@ -1,0 +1,205 @@
+
+/* =========================================
+   PREMIUM 3D GALLERY — CLEAN DESIGN
+========================================= */
+
+.galleryWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 8px auto 0;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+
+  --swiper-theme-color: #008779;
+}
+
+/* Carousel container */
+
+.carousel {
+  width: 100%;
+  padding: 16px 0 38px !important;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+/* Individual slides */
+
+.slide {
+  position: relative;
+  width: clamp(280px, 48vw, 620px) !important;
+  height: clamp(260px, 40vw, 480px);
+
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  opacity: 0.65;
+  transition: opacity 0.7s ease;
+}
+
+/* Active centre photograph */
+
+.carousel :global(.swiper-slide-active) {
+  opacity: 1;
+}
+
+/* Remove background box from photographs */
+
+.imageCard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+}
+
+/* Remove active photograph background */
+
+.carousel :global(.swiper-slide-active) .imageCard {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Display complete photograph */
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  transition: transform 0.8s ease;
+}
+
+/* Smooth desktop hover animation */
+
+@media (hover: hover) {
+  .carousel :global(.swiper-slide-active)
+  .imageCard:hover .image {
+    transform: scale(1.025);
+  }
+}
+
+/* =========================================
+   REMOVE LEFT AND RIGHT ARROWS
+========================================= */
+
+.carousel :global(.swiper-button-prev),
+.carousel :global(.swiper-button-next) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Remove Swiper slide shadows */
+
+.carousel :global(.swiper-slide-shadow-left),
+.carousel :global(.swiper-slide-shadow-right) {
+  display: none !important;
+}
+
+/* =========================================
+   PAGINATION DOTS
+========================================= */
+
+.carousel :global(.swiper-pagination) {
+  bottom: 8px !important;
+  background: transparent !important;
+}
+
+.carousel :global(.swiper-pagination-bullet) {
+  width: 7px;
+  height: 7px;
+
+  background: #008779;
+  opacity: 0.25;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.carousel :global(.swiper-pagination-bullet-active) {
+  opacity: 1;
+  background: #008779;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 820px) {
+
+  .galleryWrapper {
+    width: 100%;
+    margin: 4px auto 0;
+    padding: 0;
+  }
+
+  .carousel {
+    padding: 8px 0 28px !important;
+  }
+
+  .slide {
+    width: 80% !important;
+    height: clamp(220px, 48svh, 360px);
+  }
+
+  .imageCard {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .image {
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+/* Short mobile screens */
+
+@media (max-width: 820px) and (max-height: 650px) {
+
+  .slide {
+    height: clamp(180px, 45svh, 290px);
+  }
+
+  .carousel {
+    padding: 6px 0 24px !important;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .slide,
+  .imageCard,
+  .image {
+    transition: none !important;
+  }
+}

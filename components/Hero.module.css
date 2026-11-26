@@ -1,0 +1,256 @@
+.scrollSection {
+  --pointer-x: 0deg;
+  --pointer-y: 0deg;
+  position: relative;
+  height: 260svh;
+  background: #061e2a;
+  color: #fff;
+  isolation: isolate;
+}
+.stickyScene {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(145deg, #071e2b, #073e49 65%, #061e2a);
+}
+.background { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.glowOne, .glowTwo { position: absolute; border-radius: 50%; filter: blur(42px); }
+.glowOne { width: 65vw; height: 65vw; top: -35vw; right: -15vw; background: rgba(22, 192, 177, .24); animation: breathe 7s ease-in-out infinite alternate; }
+.glowTwo { width: 55vw; height: 55vw; bottom: -35vw; left: -20vw; background: rgba(27, 114, 168, .22); animation: breathe 9s ease-in-out infinite alternate-reverse; }
+.grid { position: absolute; inset: 0; opacity: .17; background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px, transparent 1px); background-size: 46px 46px; mask-image: linear-gradient(to bottom, #000, transparent 75%); }
+.world { position: absolute; width: min(56vw, 660px); aspect-ratio: 1; left: 50%; top: 31%; transform: translate(-50%, -50%) rotateX(var(--pointer-y)) rotateY(var(--pointer-x)); transform-style: preserve-3d; perspective: 850px; opacity: .65; }
+.orbitOne, .orbitTwo, .orbitThree { position: absolute; inset: 13%; border: 1px solid rgba(120, 252, 232, .42); border-radius: 50%; box-shadow: 0 0 24px rgba(40, 239, 208, .1), inset 0 0 22px rgba(40, 239, 208, .08); }
+.orbitOne { transform: rotateX(72deg) rotateZ(24deg); animation: orbitA 16s linear infinite; }
+.orbitTwo { transform: rotateY(72deg) rotateZ(38deg); animation: orbitB 19s linear infinite; }
+.orbitThree { transform: rotateX(45deg) rotateY(50deg); animation: orbitA 24s linear infinite reverse; }
+.core { position: absolute; inset: 35%; border-radius: 50%; background: radial-gradient(circle at 35% 35%,rgba(133,255,238,.6),rgba(16,147,145,.13) 55%,transparent 75%); filter: blur(3px); box-shadow: 0 0 90px rgba(54,255,221,.18); }
+.topPanel { position: absolute; z-index: 3; top: 0; left: 0; width: 100%; height: 60%; display: grid; place-items: center; padding: clamp(76px, 10vh, 112px) 2.5vw 1rem; text-align: center; }
+.identity, .biography { grid-area: 1 / 1; width: 100%; max-width: 1440px; }
+.identity { position: relative; z-index: 2; }
+.eyebrow { margin: 0 0 1.4rem; font-size: clamp(.56rem, 1vw, .76rem); font-weight: 700; letter-spacing: .22em; color: #8af6e0; }
+.name { margin: 0 0 1.2rem; color: #fff; font-size: clamp(1.7rem, 5.2vw, 5.3rem); font-weight: 800; letter-spacing: -.055em; line-height: 1.1; white-space: nowrap; text-shadow: 0 14px 38px rgba(0,0,0,.28); }
+.role { margin: 0 0 1.05rem; font-size: clamp(.9rem, 2.2vw, 2.1rem); line-height: 1.2; font-weight: 650; color: #b5fff0; white-space: nowrap; }
+.credentials { margin: 0; font-size: clamp(.6rem, 1.35vw, 1.18rem); font-weight: 550; line-height: 1.35; white-space: nowrap; color: #e5f9f5; }
+.biography { visibility: hidden; opacity: 0; padding: 0 4vw; max-width: 1160px; }
+.biographyLabel { display: block; margin-bottom: 1rem; font-size: clamp(.65rem, 1.2vw, .9rem); letter-spacing: .25em; color: #8af6e0; font-weight: 750; }
+.biography h2 { margin: 0; color: #fff; font-size: clamp(1.2rem, 2.7vw, 2.9rem); line-height: 1.35; font-weight: 650; text-wrap: balance; text-shadow: 0 8px 32px rgba(0,0,0,.55); }
+.photoPanel { position: absolute; left: 0; bottom: 0; width: 100%; height: 40%; z-index: 2; display: flex; justify-content: center; align-items: flex-end; pointer-events: none; }
+.portraitStage { width: 100%; height: 100%; display: flex; align-items: flex-end; justify-content: center; transform-origin: 50% 100%; will-change: transform; }
+.portraitImage { display: block; height: 100%; width: 100%; max-width: none; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 -8px 32px rgba(0,0,0,.25)); }
+.scrollCue { position: absolute; bottom: 1.3rem; right: 2vw; z-index: 4; font-size: .64rem; letter-spacing: .18em; color: #a9eee2; writing-mode: vertical-rl; display: flex; gap: .7rem; align-items: center; }
+.progress { position: absolute; z-index: 5; bottom: 0; left: 0; width: 100%; height: 3px; background: #6ef6d8; transform: scaleX(0); transform-origin: left center; }
+@keyframes breathe { to { transform: translate(5%, -5%) scale(1.15); } }
+@keyframes orbitA { to { transform: rotateX(72deg) rotateZ(384deg); } }
+@keyframes orbitB { to { transform: rotateY(72deg) rotateZ(398deg); } }
+@media (max-width: 820px) {
+  .scrollSection { height: 245svh; }
+  .topPanel { padding: clamp(70px, 11vh, 100px) 2.2vw 1rem; }
+  .eyebrow { font-size: clamp(.47rem, 1.7vw, .65rem); letter-spacing: .12em; margin-bottom: 1rem; }
+  .name { font-size: clamp(1.32rem, 6.3vw, 3.15rem); margin-bottom: 1rem; }
+  .role { font-size: clamp(.65rem, 3vw, 1.3rem); margin-bottom: 1rem; }
+  /* A long H3 can remain on one line only by reducing font size on narrow screens. */
+  .credentials { font-size: clamp(.42rem, 1.65vw, .8rem); letter-spacing: -.035em; }
+  .world { width: 95vw; top: 32%; }
+  .biography { padding: 0 4vw; }
+  .biography h2 { font-size: clamp(1.12rem, 4.6vw, 1.8rem); line-height: 1.45; }
+  .photoPanel { height: 40%; }
+  .portraitImage { object-fit: contain; object-position: center bottom; }
+  .scrollCue { right: .7rem; bottom: 1.3rem; font-size: .5rem; }
+}
+@media (max-width: 380px) {
+  .name { font-size: 6vw; }
+  .role { font-size: 2.8vw; }
+  .credentials { font-size: 1.55vw; }
+  .biography h2 { font-size: 4.35vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scrollSection { height: 100svh; }
+  .glowOne, .glowTwo, .orbitOne, .orbitTwo, .orbitThree { animation: none; }
+  .biography { display: none; }
+  .portraitStage { will-change: auto; }
+}
+
+/* Mobile-only full-screen portrait transition. */
+.mobileShade { display: none; }
+@media (max-width: 820px) {
+  .topPanel { inset: 0; height: 100%; display: block; padding: 0; pointer-events: none; }
+  .identity { position: absolute; top: 0; left: 0; height: 60%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: clamp(64px, 10svh, 90px) 8px 12px; }
+  /* .photoPanel { background: #fff; overflow: hidden; height: 40%; } */
+    .photoPanel {
+    background: #ffffff;
+    overflow: hidden;
+    height: 40%;
+    width: 100%;
+  }
+  /* .portraitStage { height: 100%; width: 100%; } */
+   .portraitStage {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* .portraitImage { object-fit: cover; object-position: center 18%; filter: none; } */
+  .portraitImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center center;
+  filter: none;
+}
+  .mobileShade { display: block; position: absolute; inset: 0; z-index: 2; opacity: 0; pointer-events: none; background: linear-gradient(to bottom, transparent 42%, rgba(5,23,34,.78) 60%, #051722 100%); }
+  .biography { position: absolute; bottom: 0; left: 0; height: 40%; width: 100%; padding: 12px 20px max(20px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; justify-content: center; text-align: center; overflow-y: auto; pointer-events: auto; }
+  .biographyLabel { font-size: 10px; margin-bottom: 8px; }
+  .biography h2 { font-size: clamp(15px, 4.4vw, 22px); line-height: 1.4; font-weight: 600; text-wrap: pretty; }
+  .scrollCue { display: none; }
+}
+@media (max-width: 820px) and (prefers-reduced-motion: reduce) {
+  .biography { display: none; }
+}
+
+/* Mobile Hero - Seamless Doctor Portrait */
+
+@media (max-width: 820px) {
+
+  .photoPanel {
+    background: #ffffff !important;
+    width: 100%;
+    overflow: hidden;
+    border: none;
+    box-shadow: none;
+  }
+
+  .portraitStage {
+    width: 100%;
+    height: 100%;
+    background: transparent !important;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .portraitImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+}
+
+
+/* ==========================================
+   HERO - PREMIUM MOBILE TYPOGRAPHY
+========================================== */
+
+@media (max-width: 820px) {
+
+  .identity {
+    box-sizing: border-box;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* Doctor name - H1 */
+
+  .identity .name {
+    font-size: clamp(27px, 8.5vw, 46px) !important;
+    font-weight: 800 !important;
+    line-height: 1.15 !important;
+    letter-spacing: -1.2px !important;
+
+    color: #ffffff !important;
+
+    white-space: nowrap !important;
+
+    margin: 0 0 14px !important;
+
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Doctor designation - H2 */
+
+  .identity .role {
+    font-size: clamp(13px, 4.1vw, 22px) !important;
+    font-weight: 650 !important;
+    line-height: 1.4 !important;
+
+    letter-spacing: -0.35px !important;
+    color: rgb(94, 234, 212) !important;
+
+    white-space: nowrap !important;
+
+    margin: 0 0 14px !important;
+  }
+
+  /* Doctor qualifications - H3 */
+
+  .identity .credentials {
+    width: 100%;
+    max-width: 500px;
+
+    font-size: clamp(12px, 3.5vw, 18px) !important;
+    font-weight: 500 !important;
+    line-height: 1.55 !important;
+
+    letter-spacing: 0 !important;
+    color: #e5f9f5 !important;
+
+    white-space: normal !important;
+    text-wrap: balance;
+    text-align: center;
+
+    margin: 0 !important;
+  }
+
+  /* Second animated frame */
+
+  .biography h2 {
+    font-size: clamp(17px, 4.8vw, 24px) !important;
+    font-weight: 650 !important;
+    line-height: 1.45 !important;
+
+    color: #ffffff !important;
+
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Compact mobile screens */
+
+@media (max-width: 820px) and (max-height: 550px) {
+
+  .identity .name {
+    font-size: clamp(25px, 8vw, 34px) !important;
+    margin-bottom: 8px !important;
+  }
+
+  .identity .role {
+    font-size: clamp(12px, 3.8vw, 16px) !important;
+    margin-bottom: 8px !important;
+  }
+
+  .identity .credentials {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+
+  .biography h2 {
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+  }
+}

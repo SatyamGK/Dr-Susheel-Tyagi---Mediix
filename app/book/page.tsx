@@ -16,12 +16,7 @@ export default function Book() {
 
   return (
     <>
-      <PageHero
-        bg="clinicFront"
-        eyebrow="Appointment Booking"
-        title="Plan your visit"
-        lead="Book online in under a minute, or connect directly with our clinic desk via Call or WhatsApp."
-      />
+     <PageHero title="Plan your visit" />
       <section className="sec">
         <div className="book-direct-bar">
           <span>Prefer instant assistance?</span>

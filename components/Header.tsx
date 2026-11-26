@@ -3,7 +3,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import useLenis from "@/hooks/useLenis";
@@ -15,6 +16,39 @@ export default function Header() {
   useLenis();
 
   const path = usePathname();
+  const router = useRouter();
+
+  const handleBack = () => {
+    setOpen(false);
+
+    if (path === "/") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+      return;
+    }
+
+    try {
+      const previous = document.referrer
+        ? new URL(document.referrer)
+        : null;
+
+      if (
+        previous &&
+        previous.origin === window.location.origin &&
+        window.history.length > 1
+      ) {
+        router.back();
+      } else {
+        router.push("/");
+      }
+    } catch {
+      router.push("/");
+    }
+  };
+
   const [small, setSmall] = useState(false);
   const [open, setOpen] = useState(false);
   const bar = useRef<HTMLDivElement>(null);
@@ -63,6 +97,32 @@ export default function Header() {
     <header className={`hdr ${small ? "small" : ""}`}>
       <div className="progress" ref={bar} />
 
+
+
+      {path !== "/" && (
+        <button
+          type="button"
+          className="header-back-button"
+          aria-label="Go back"
+          onClick={handleBack}
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M19 12H5" />
+            <path d="M12 19L5 12L12 5" />
+          </svg>
+        </button>
+      )}
+
       <Link
         href="/"
         className="st-logo-link"
@@ -99,6 +159,11 @@ export default function Header() {
 
         <BookButton onClick={() => setOpen(false)} />
       </nav>
+
+
+      <div className="header-mobile-booking">
+        <BookButton onClick={() => setOpen(false)} />
+      </div>
 
       <button
         type="button"

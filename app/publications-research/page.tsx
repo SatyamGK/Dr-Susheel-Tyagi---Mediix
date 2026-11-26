@@ -1,7 +1,0 @@
-import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
-import SectionHead from "@/components/SectionHead";
-import BgSection from "@/components/BgSection";
-import CtaBand from "@/components/CtaBand";
-export const metadata: Metadata = { title: "Research & Clinical Interests", description: "Explore Dr. Susheel Tyagi's clinical interests in diabetes, metabolic health and internal medicine. Verified publications will be listed when available." };
-export default function Pubs() { return <><PageHero bg="pub" eyebrow="Research & Vision" title="Clinical questions. Evidence-informed care." lead="Research and clinical interests across diabetes, metabolic health and internal medicine." /><BgSection bg="vision" tone="dark"><SectionHead kw="Areas of focus" title="Making complex health information easier to understand" sub="The aim is to support informed conversations about prevention, diagnosis and long-term management." /><div className="research-copy"><h2>Areas of clinical interest</h2><ul><li>Diabetes and blood-glucose management</li><li>Hypertension and cardiovascular risk factors</li><li>Obesity and metabolic health</li><li>Preventive and adult internal medicine</li></ul><p>Publication titles and journal details will be added here once they are confirmed.</p></div></BgSection><BgSection tone="white" narrow><SectionHead kw="Publications" title="Research and publications" sub="Publications and research updates will be listed here as they become available." /></BgSection><CtaBand /></>; }

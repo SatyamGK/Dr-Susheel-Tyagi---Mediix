@@ -1,154 +1,141 @@
 "use client";
+
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/animations";
+import styles from "./Hero.module.css";
+
+const biography =
+  "Dr. Susheel Tyagi is an experienced Internal Medicine specialist and consultant physician, with over 16 years of clinical experience and experience caring for thousands of patients.";
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const card1Ref = useRef<HTMLElement>(null);
-  const card2Ref = useRef<HTMLElement>(null);
-  const proofRef = useRef<HTMLDivElement>(null);
-  const portraitRef = useRef<HTMLDivElement>(null);
+  const section = useRef<HTMLElement>(null);
+  const identity = useRef<HTMLDivElement>(null);
+  const biographyRef = useRef<HTMLDivElement>(null);
+  const photoPanel = useRef<HTMLDivElement>(null);
+  const shade = useRef<HTMLDivElement>(null);
+  const portrait = useRef<HTMLDivElement>(null);
+  const progress = useRef<HTMLDivElement>(null);
+  const world = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const root = section.current;
+    if (!root) return;
+
     const mm = gsap.matchMedia();
-    // The hero is a 3-stage scroll experience: identity, credentials, care,
-    // followed by a full-frame portrait zoom into the next section.
     mm.add("(min-width: 821px) and (prefers-reduced-motion: no-preference)", () => {
+      // Initial view is fully visible. Only the scroll changes the scene.
+      gsap.set(biographyRef.current, { autoAlpha: 0, y: 65, scale: 0.96 });
+      gsap.set(identity.current, { autoAlpha: 1, y: 0 });
+      gsap.set(portrait.current, { scale: 1, yPercent: 0, transformOrigin: "50% 100%" });
+
       const tl = gsap.timeline({
         defaults: { ease: "none" },
-        scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom bottom", scrub: 0.75, invalidateOnRefresh: true },
+        scrollTrigger: {
+          trigger: root,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.65,
+          invalidateOnRefresh: true,
+        },
       });
-      gsap.set([card1Ref.current, card2Ref.current, proofRef.current], { autoAlpha: 0, y: 90, rotateX: -13 });
-      tl.to(card1Ref.current, { autoAlpha: 1, y: 0, rotateX: 0, duration: 1 })
-        .to(card1Ref.current, { autoAlpha: 0, y: -65, duration: .65 }, "+=.65")
-        .to(card2Ref.current, { autoAlpha: 1, y: 0, rotateX: 0, duration: 1 }, "<")
-        .to(proofRef.current, { autoAlpha: 1, y: 0, rotateX: 0, duration: .8 }, "-=.25")
-        .to(".cinema-name-line", { yPercent: -30, autoAlpha: 0, stagger: .08, duration: 1 }, "+=.5")
-        .to([card2Ref.current, proofRef.current], { autoAlpha: 0, y: -55, duration: .8 }, "<")
-        .to(portraitRef.current, { scale: 2.2, xPercent: -36, yPercent: 6, duration: 2.3, ease: "power2.inOut" }, "-=.25")
-        .to(".doctor-hero-video-overlay", { opacity: .98, duration: 1.2 }, "<")
-        .to(portraitRef.current, { autoAlpha: 0, scale: 2.55, duration: .65 }, "-=.65");
-      gsap.fromTo(".cinema-progress", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom bottom", scrub: true } });
+      tl.to({}, { duration: 0.65 }) // Hold the landing view at the beginning.
+        .to(identity.current, { autoAlpha: 0, y: -55, duration: 0.75 })
+        .to(portrait.current, { scale: 1.75, yPercent: -4, duration: 1.6 }, "<")
+        .to(biographyRef.current, { autoAlpha: 1, y: 0, scale: 1, duration: 1.05 }, "-=0.85")
+        .to(world.current, { rotate: 24, scale: 1.25, duration: 1.4 }, "<")
+        .to({}, { duration: 0.8 }); // Readable hold before next section.
+
+      gsap.fromTo(progress.current, { scaleX: 0 }, {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: { trigger: root, start: "top top", end: "bottom bottom", scrub: true },
+      });
     });
-    // Mobile: upper 60% is an animated editorial story; the doctor's portrait
-    // remains anchored in the lower 40%, then grows as the next section arrives.
+
     mm.add("(max-width: 820px) and (prefers-reduced-motion: no-preference)", () => {
-      gsap.set([card1Ref.current, card2Ref.current, proofRef.current], { autoAlpha: 0, y: 38 });
       const tl = gsap.timeline({
         defaults: { ease: "none" },
-        scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom bottom", scrub: .45, invalidateOnRefresh: true },
+        scrollTrigger: { trigger: root, start: "top top", end: "bottom bottom", scrub: 0.5, invalidateOnRefresh: true },
       });
-      tl.to(card1Ref.current, { autoAlpha: 1, y: 0, duration: .85 })
-        .to(card1Ref.current, { autoAlpha: 0, y: -35, duration: .65 }, "+=.6")
-        .to(card2Ref.current, { autoAlpha: 1, y: 0, duration: .85 }, "<")
-        .to(card2Ref.current, { autoAlpha: 0, y: -35, duration: .7 }, "+=.7")
-        .to(proofRef.current, { autoAlpha: 1, y: 0, duration: .75 }, "<")
-        .to(".cinema-name-line", { autoAlpha: 0, yPercent: -35, duration: .8 }, "+=.5")
-        .to(proofRef.current, { autoAlpha: 0, y: -35, duration: .6 }, "<")
-        .to(portraitRef.current, { scale: 1.9, xPercent: -3, yPercent: -22, duration: 1.8, ease: "power2.inOut" }, "-=.1")
-        .to(portraitRef.current, { autoAlpha: 0, scale: 2.2, duration: .6 }, "-=.4");
-      gsap.fromTo(".cinema-progress", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom bottom", scrub: true } });
+      tl.to({}, { duration: 0.35 })
+        .to(identity.current, { autoAlpha: 0, y: -24, duration: 0.65 })
+        .to(photoPanel.current, { height: "100%", duration: 1.4 }, "<")
+        .to(shade.current, { opacity: 1, duration: 0.65 }, "-=0.65")
+        .fromTo(biographyRef.current, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.65 })
+        .to({}, { duration: 0.85 });
+      gsap.fromTo(progress.current, { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: root, start: "top top", end: "bottom bottom", scrub: true } });
     });
-    const section = sectionRef.current;
-    const portrait = portraitRef.current;
-    const move = (event: PointerEvent) => {
-      if (!section || !portrait || event.pointerType === "touch") return;
-      const r = section.getBoundingClientRect();
-      const x = (event.clientX - r.left) / r.width - 0.5;
-      const y = (event.clientY - r.top) / r.height - 0.5;
-      section.style.setProperty("--mx", `${(x * 36).toFixed(1)}px`);
-      section.style.setProperty("--my", `${(y * 26).toFixed(1)}px`);
-      portrait.style.setProperty("--rx", `${(-y * 7).toFixed(2)}deg`);
-      portrait.style.setProperty("--ry", `${(x * 9).toFixed(2)}deg`);
+
+    // Subtle pointer-based 3D motion; only on precise-pointer devices.
+    const pointerQuery = window.matchMedia("(pointer: fine) and (prefers-reduced-motion: no-preference)");
+    const onPointerMove = (event: PointerEvent) => {
+      if (!pointerQuery.matches) return;
+      const bounds = root.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+      const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+      root.style.setProperty("--pointer-x", `${(x * 14).toFixed(2)}deg`);
+      root.style.setProperty("--pointer-y", `${(-y * 10).toFixed(2)}deg`);
     };
-    const reset = () => {
-      section?.style.setProperty("--mx", "0px");
-      section?.style.setProperty("--my", "0px");
-      portrait?.style.setProperty("--rx", "0deg");
-      portrait?.style.setProperty("--ry", "0deg");
+    const resetPointer = () => {
+      root.style.setProperty("--pointer-x", "0deg");
+      root.style.setProperty("--pointer-y", "0deg");
     };
-    if (window.matchMedia("(pointer:fine) and (prefers-reduced-motion:no-preference)").matches) {
-      section?.addEventListener("pointermove", move, { passive: true });
-      section?.addEventListener("pointerleave", reset);
-    }
+    root.addEventListener("pointermove", onPointerMove, { passive: true });
+    root.addEventListener("pointerleave", resetPointer);
+
     return () => {
-      section?.removeEventListener("pointermove", move);
-      section?.removeEventListener("pointerleave", reset);
+      root.removeEventListener("pointermove", onPointerMove);
+      root.removeEventListener("pointerleave", resetPointer);
       mm.revert();
     };
   }, []);
 
   return (
-    <section ref={sectionRef} className="doctor-hero-scroll" aria-labelledby="doctor-name">
-      <div className="doctor-hero-sticky">
-        <video
-          className="doctor-hero-video"
-          src="/videos/mediix-banner.mp4"
-          poster="/images/bg/mediix-banner-poster.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-        />
-        <div className="doctor-hero-video-overlay" />
-        <div className="cinema-grid" aria-hidden="true" />
-        <div className="cinema-spotlight" aria-hidden="true" />
-        <div className="cinema-topline" aria-hidden="true"><span>MEDIIX / PERSONALIZED CARE</span><span>EST. IN CLINICAL EXCELLENCE</span></div>
-        <div className="cinema-scroll-marker" aria-hidden="true"><span>SCROLL TO EXPLORE</span><i /></div>
-        <div className="cinema-progress" aria-hidden="true" />
-        <div className="doctor-hero-grid">
-          <div className="doctor-hero-copy">
-            <p className="cinema-pretitle"><span className="cinema-pulse" /> A MORE PERSONAL KIND OF MEDICINE</p>
-            <h1 id="doctor-name" className="hero-name">
-              <span className="eyebrow hero-kicker">
-                Diabetes care · Internal medicine · Indirapuram, Ghaziabad
-              </span>
-              <span className="cinema-name-line">Dr. Susheel</span><span className="cinema-name-line cinema-name-accent">Tyagi<span className="cinema-name-period">.</span></span>
-            </h1>
+    <section ref={section} className={styles.scrollSection} aria-labelledby="doctor-name">
+      <div className={styles.stickyScene}>
+        <div className={styles.background} aria-hidden="true">
+          <div className={styles.glowOne} />
+          <div className={styles.glowTwo} />
+          <div ref={world} className={styles.world}>
+            <div className={styles.orbitOne} />
+            <div className={styles.orbitTwo} />
+            <div className={styles.orbitThree} />
+            <div className={styles.core} />
+          </div>
+          <div className={styles.grid} />
+        </div>
 
-            <div className="hero-popup-stack">
-              <article ref={card1Ref} className="hero-popup hero-popup-primary">
-                <h2 className="hero-role">MD – Internal Medicine | Researcher</h2>
-                <p className="hero-credentials">
-                  MBBS · MD (KGMU) · PG Diploma, Royal College of Physicians (UK) · Fellow, ACP (USA)
-                </p>
-              </article>
-
-              <article ref={card2Ref} className="hero-popup hero-popup-secondary">
-                <p className="hero-intro">
-                  Dr. Susheel Tyagi is an experienced Internal Medicine specialist and consultant
-                  physician, with over 16 years of clinical experience and experience caring for
-                  thousands of patients.
-                </p>
-              </article>
-            </div>
-
-            <div ref={proofRef} className="hero-proof">
-              <span>16+ years of clinical experience</span>
-              <span>Internal Medicine</span>
-              <span>Diabetes care</span>
-            </div>
+        <div className={styles.topPanel}>
+          <div ref={identity} className={styles.identity}>
+            {/* <p className={styles.eyebrow}>MEDIIX CLINIC · PERSONALIZED MEDICINE</p> */}
+            <h1 id="doctor-name" className={styles.name}>Dr. Susheel Tyagi</h1>
+            <h2 className={styles.role}>MD – Internal Medicine | Researcher</h2>
+            <h3 className={styles.credentials}>
+              MBBS · MD (KGMU) · PG Diploma, Royal College of Physicians (UK) · Fellow, ACP (USA)
+            </h3>
           </div>
 
-          <div ref={portraitRef} className="doctor-portrait-wrap hero-portrait-integrated cinema-portrait-stage">
-            <div className="hero-portrait-aura" aria-hidden="true" />
-            <div className="cinema-portrait-halo" aria-hidden="true" />
-            <span className="cinema-portrait-index" aria-hidden="true">01 / PHYSICIAN</span>
-            <div className="portrait-orbit orbit-one" aria-hidden="true" />
-            <div className="portrait-orbit orbit-two" aria-hidden="true" />
+          <div ref={biographyRef} className={styles.biography} aria-label="About Dr. Susheel Tyagi">
+            <span className={styles.biographyLabel}>EXPERIENCE & CARE</span>
+            <h2>{biography}</h2>
+          </div>
+        </div>
+
+        <div ref={photoPanel} className={styles.photoPanel}>
+          <div ref={portrait} className={styles.portraitStage}>
             <img
-              className="doctor-portrait hero-portrait-photo"
+              className={styles.portraitImage}
               src="/images/doctor.png"
               width={396}
               height={505}
-              alt="Portrait of Dr. Susheel Tyagi, consultant physician"
+              alt="Dr. Susheel Tyagi, consultant physician"
               fetchPriority="high"
             />
-            <span className="portrait-caption">Evidence-led care. A personal approach.</span>
           </div>
         </div>
+        <div ref={shade} className={styles.mobileShade} aria-hidden="true" />
+        <div className={styles.scrollCue} aria-hidden="true">SCROLL TO EXPLORE <span>↓</span></div>
+        <div ref={progress} className={styles.progress} aria-hidden="true" />
       </div>
     </section>
   );

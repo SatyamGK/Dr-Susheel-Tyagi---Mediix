@@ -20,11 +20,11 @@ export const site = {
   chips: ["Thousands of patients cared for", "FACP (USA)", "16+ years of clinical experience"],
   slots: ["Afternoon", "Evening"],
   conditions: [
+    { icon: "stethoscope", t: "Internal Medicine", d: "Adult medical consultation for common health concerns and complex medical conditions.", detail: "Internal Medicine focuses on the prevention, diagnosis and non-surgical management of health conditions in adults. It often involves understanding how symptoms, medical history, medicines and different health conditions may relate to one another." },
     { icon: "activity", t: "Type 1 Diabetes", d: "Individualised support for insulin use, glucose monitoring and day-to-day diabetes management.", detail: "Type 1 diabetes is a condition in which the body produces little or no insulin because the insulin-producing cells in the pancreas are affected. Ongoing care commonly involves clinician-guided insulin management, glucose monitoring, education and regular review of health needs." },
     { icon: "activity", t: "Type 2 Diabetes", d: "Assessment and ongoing care focused on blood-glucose management and reducing future health risks.", detail: "Type 2 diabetes is a long-term metabolic condition in which the body does not use insulin effectively and blood glucose can become elevated. Care is individualised and may include assessment of health risks, monitoring, lifestyle support and clinician-directed treatment." },
     { icon: "heart", t: "Hypertension", d: "Evaluation and follow-up for high blood pressure and associated cardiovascular risk factors.", detail: "Hypertension means blood pressure remains higher than the recommended range over time. It often has no obvious symptoms, so appropriate measurement, assessment of associated risks and ongoing follow-up are important parts of care." },
     { icon: "activity", t: "Obesity", d: "Medical guidance for weight-related health concerns and sustainable lifestyle changes.", detail: "Obesity is a complex, chronic health condition involving excess body fat that may affect health. A medical assessment can consider weight history, related conditions, medicines, lifestyle and individual circumstances when discussing appropriate management options." },
-    { icon: "stethoscope", t: "Internal Medicine", d: "Adult medical consultation for common health concerns and complex medical conditions.", detail: "Internal Medicine focuses on the prevention, diagnosis and non-surgical management of health conditions in adults. It often involves understanding how symptoms, medical history, medicines and different health conditions may relate to one another." },
     { icon: "shield", t: "Metabolic Health", d: "A joined-up approach to metabolic risk factors, prevention and long-term wellbeing.", detail: "Metabolic health describes how the body manages processes such as blood glucose, blood pressure, blood lipids and body weight. Reviewing these factors together can help identify health risks and support informed conversations about prevention and follow-up." },
   ],
   steps: [
@@ -64,8 +64,6 @@ export const site = {
   ],
   reach: [],
   nav: [
-    ["Home", "/"], ["About", "/about"], ["Specialities", "/specialities"],
-    ["Clinical Journey", "/career-milestones"], ["Publications & Research", "/research-vision"],
-    ["Testimonials", "/testimonials"], ["Contact", "/contact"],
+    ["Home", "/"], ["Specialities", "/specialities"], ["Clinical Journey", "/career-milestones"], ["Research & Vision", "/research-vision"], ["Testimonials", "/testimonials"], ["About", "/about"], ["Contact", "/contact"],
   ] as [string, string][],
 };
