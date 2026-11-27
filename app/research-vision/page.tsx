@@ -1,25 +1,9 @@
 import type { Metadata } from "next";
-import BgSection from "@/components/BgSection";
-import ResearchPreview from "@/components/ResearchPreview";
 import InternalPageBanner from "@/components/InternalPageBanner";
 import CtaBand from "@/components/CtaBand";
+import Motion from "@/components/DedicatedPageMotion";
+import s from "@/components/DedicatedPages.module.css";
+import Icon from "@/components/Icon";
 
-export const metadata: Metadata = {
-  title: "Research & Vision | Sugar Coat Diabetes Care Platform",
-  description: "The Sugar Coat concept: a multilingual, privacy-respecting platform to support continuity, engagement and coordination in diabetes care between clinic visits.",
-  alternates: { canonical: "/research-vision" },
-};
-
-export default function Page() {
-  return (
-    <>
-      <InternalPageBanner title="Research & Vision" />
-      <div className="internal-page-content">
-        <BgSection bg="vision" tone="dark" id="research-vision" className="research-section">
-      <ResearchPreview />
-    </BgSection>
-      </div>
-      <CtaBand locations={false} />
-    </>
-  );
-}
+export const metadata: Metadata = {title: 'Research & Vision', description: 'Explore the proposed Sugar Coat connected diabetes care concept, patient consent and responsible AI.', alternates: {canonical: "/research-vision"}};
+export default function Page() {return <><InternalPageBanner title={'Research & Vision'}/><Motion><section className={s.intro}><span className={s.eyebrow}>Research concept · Sugar Coat</span><h2>What happens between clinic visits matters.</h2><p>Continuity of care depends on whether patients can understand their care plan, access support and communicate practical difficulties. Sugar Coat explores how technology could support those everyday needs.</p></section><section data-motion="tilt"><div className={s.network}><h2>Sugar Coat</h2><p>Five connected elements around the patient</p><div className={s.nodes}>{['AI Care','Care Connections','Care Passport','Clinic Intelligence','Community & Rewards'].map(x=><span key={x}>{x}</span>)}</div></div></section><section><h2>A possible patient journey</h2><div className={s.timeline}><span className={s.progress} data-progress aria-hidden="true"/>{[['book','Understand the plan','A voice-first guide could explain clinician-approved instructions in accessible language.'],['calendar','Remove practical barriers','With consent, help request appointments, reports or dietician support.'],['shield','Keep records together','A patient-owned passport could organise prescriptions, reports and care plans.'],['activity','Make follow-up needs visible','A non-clinical view could surface requests and reported barriers for human review.'],['user','Build supportive routines','Curated education and community participation could encourage continued engagement.']].map(([icon,title,body])=><div data-motion="slide" key={title}><article className={s.card}><span className={s.icon}><Icon name={icon}/></span><h3>{title}</h3><p>{body}</p></article></div>)}</div></section><section className={s.note}><h2>Responsible development</h2><p>Sugar Coat is a proposed concept, not an available clinical service. It is intended to support human care, not diagnose, recommend treatment or provide clinical decision support.</p><p>Future evaluation could examine accessibility, patient consent, privacy safeguards and whether practical follow-up barriers are addressed.</p></section></Motion><CtaBand locations={false}/></>;}

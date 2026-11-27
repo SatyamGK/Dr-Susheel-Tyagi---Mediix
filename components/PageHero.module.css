@@ -23,14 +23,14 @@
     #082631
   );
 
-  border-bottom: 2px solid #5eead4;
+  border-bottom: 2px solid #111340;
 }
 
 .heading {
   position: relative;
   z-index: 5;
 
-  color: rgb(94, 234, 212);
+  color: rgb(17, 19, 64);
 
   font-size: clamp(28px, 5vw, 58px);
   font-weight: 800;

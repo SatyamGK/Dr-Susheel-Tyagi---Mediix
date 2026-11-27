@@ -61,9 +61,10 @@ export const site = {
     { q: "Where is Mediix Clinic located?", a: "Mediix Clinic is at 14/3, Niti Khand-2, Indirapuram, near Swarn Jayanti Park, Ghaziabad, Uttar Pradesh 201014." },
     { q: "What should I bring to my first appointment?", a: "Bring previous medical reports, a list of current medicines, relevant prescriptions and any home blood-glucose or blood-pressure readings." },
     { q: "How can I request an appointment?", a: "Use the Book Appointment option on this website, or contact the clinic by phone or WhatsApp to enquire about an appointment." },
+    { q: "Can I discuss my home blood sugar or blood pressure readings?", a: "Yes. Bring any readings you have recorded at home, along with the dates and times if available, so the doctor can review them during your consultation." },
   ],
   reach: [],
   nav: [
-    ["Home", "/"], ["Specialities", "/specialities"], ["Clinical Journey", "/career-milestones"], ["Research & Vision", "/research-vision"], ["Testimonials", "/testimonials"], ["About", "/about"], ["Contact", "/contact"],
+    ["Home", "/"], ["Specialities", "/specialities"], ["Research & Vision", "/research-vision"], ["About", "/about"], ["Contact", "/contact"],
   ] as [string, string][],
 };

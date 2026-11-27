@@ -5,7 +5,7 @@ import { gsap } from "@/lib/animations";
 import styles from "./Hero.module.css";
 
 const biography =
-  "Dr. Susheel Tyagi is an experienced Internal Medicine specialist and consultant physician, with over 16 years of clinical experience and experience caring for thousands of patients.";
+  "Dr. Susheel Tyagi is an experienced Internal Medicine specialist and consultant physician, with over 16 years of clinical experience and experience caring for thousands of patients. Offering consultation at Indirapuram, Ghaziabad";
 
 export default function Hero() {
   const section = useRef<HTMLElement>(null);
@@ -15,7 +15,6 @@ export default function Hero() {
   const shade = useRef<HTMLDivElement>(null);
   const portrait = useRef<HTMLDivElement>(null);
   const progress = useRef<HTMLDivElement>(null);
-  const world = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const root = section.current;
@@ -42,7 +41,6 @@ export default function Hero() {
         .to(identity.current, { autoAlpha: 0, y: -55, duration: 0.75 })
         .to(portrait.current, { scale: 1.75, yPercent: -4, duration: 1.6 }, "<")
         .to(biographyRef.current, { autoAlpha: 1, y: 0, scale: 1, duration: 1.05 }, "-=0.85")
-        .to(world.current, { rotate: 24, scale: 1.25, duration: 1.4 }, "<")
         .to({}, { duration: 0.8 }); // Readable hold before next section.
 
       gsap.fromTo(progress.current, { scaleX: 0 }, {
@@ -59,50 +57,30 @@ export default function Hero() {
       });
       tl.to({}, { duration: 0.35 })
         .to(identity.current, { autoAlpha: 0, y: -24, duration: 0.65 })
-        .to(photoPanel.current, { height: "100%", duration: 1.4 }, "<")
+        .fromTo(photoPanel.current, { height: "60%" }, { height: "100%", duration: 1.4, immediateRender: false }, "<")
+        // .fromTo(photoPanel.current, { height: "var(--hero-photo-height)" }, { height: "100%", duration: 1.4, immediateRender: false }, "<")
         .to(shade.current, { opacity: 1, duration: 0.65 }, "-=0.65")
         .fromTo(biographyRef.current, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.65 })
         .to({}, { duration: 0.85 });
       gsap.fromTo(progress.current, { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: root, start: "top top", end: "bottom bottom", scrub: true } });
     });
 
-    // Subtle pointer-based 3D motion; only on precise-pointer devices.
-    const pointerQuery = window.matchMedia("(pointer: fine) and (prefers-reduced-motion: no-preference)");
-    const onPointerMove = (event: PointerEvent) => {
-      if (!pointerQuery.matches) return;
-      const bounds = root.getBoundingClientRect();
-      const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-      const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-      root.style.setProperty("--pointer-x", `${(x * 14).toFixed(2)}deg`);
-      root.style.setProperty("--pointer-y", `${(-y * 10).toFixed(2)}deg`);
-    };
-    const resetPointer = () => {
-      root.style.setProperty("--pointer-x", "0deg");
-      root.style.setProperty("--pointer-y", "0deg");
-    };
-    root.addEventListener("pointermove", onPointerMove, { passive: true });
-    root.addEventListener("pointerleave", resetPointer);
-
-    return () => {
-      root.removeEventListener("pointermove", onPointerMove);
-      root.removeEventListener("pointerleave", resetPointer);
-      mm.revert();
-    };
+    return () => mm.revert();
   }, []);
 
   return (
     <section ref={section} className={styles.scrollSection} aria-labelledby="doctor-name">
       <div className={styles.stickyScene}>
         <div className={styles.background} aria-hidden="true">
-          <div className={styles.glowOne} />
-          <div className={styles.glowTwo} />
-          <div ref={world} className={styles.world}>
-            <div className={styles.orbitOne} />
-            <div className={styles.orbitTwo} />
-            <div className={styles.orbitThree} />
-            <div className={styles.core} />
-          </div>
-          <div className={styles.grid} />
+          <svg className={styles.medicalPattern} viewBox="0 0 800 400" fill="none" preserveAspectRatio="xMidYMid slice">
+            <g stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M0 290H190l18-24 20 44 25-82 23 62H800" />
+              <path d="M65 50v55a35 35 0 0 0 70 0V50m-70 0h12m46 0h12M100 140v28a36 36 0 0 0 72 0v-15" />
+              <circle cx="172" cy="145" r="8" />
+              <path d="M700 65v52m-26-26h52" strokeWidth="8" />
+              <path d="M650 180h65v82h-65zM667 180v-10h31v10m-32 25h33m-33 15h33m-33 15h23" />
+            </g>
+          </svg>
         </div>
 
         <div className={styles.topPanel}>
@@ -116,7 +94,7 @@ export default function Hero() {
           </div>
 
           <div ref={biographyRef} className={styles.biography} aria-label="About Dr. Susheel Tyagi">
-            <span className={styles.biographyLabel}>EXPERIENCE & CARE</span>
+            {/* <span className={styles.biographyLabel}>EXPERIENCE & CARE</span> */}
             <h2>{biography}</h2>
           </div>
         </div>
@@ -133,9 +111,9 @@ export default function Hero() {
             />
           </div>
         </div>
-        <div ref={shade} className={styles.mobileShade} aria-hidden="true" />
-        <div className={styles.scrollCue} aria-hidden="true">SCROLL TO EXPLORE <span>↓</span></div>
-        <div ref={progress} className={styles.progress} aria-hidden="true" />
+        {/* <div ref={shade} className={styles.mobileShade} aria-hidden="true" /> */}
+        {/* <div className={styles.scrollCue} aria-hidden="true">SCROLL TO EXPLORE <span>↓</span></div> */}
+        {/* <div ref={progress} className={styles.progress} aria-hidden="true" /> */}
       </div>
     </section>
   );

@@ -4,8 +4,8 @@ import { gsap } from "@/lib/animations";
 import styles from "./ClinicalJourney.module.css";
 
 const groups = [
-  { title: "Medical Education", icon: "education", items: ["MBBS, King George’s Medical University, Lucknow", "MD (Medicine), King George’s Medical University, Lucknow", "PG Diploma in Clinical Endocrinology and Diabetes, Royal College of Physicians, UK"] },
-  { title: "National & International Fellowships", icon: "fellowship", items: ["Fellow of the Indian College of Physicians (FICP)", "Fellow of the American College of Physicians (FACP)", "Fellow of the Indian Association of Clinical Medicine (FIACM).", "Fellow of Diabetes India (FDIAI)"] },
+  { title: "Medical Education", icon: "education", items: ["MBBS from KGMU, Lucknow", "MD (Medicine) from KGMU, Lucknow", "PG Diploma in Clinical Endocrinology and Diabetes, Royal College of Physicians, UK"] },
+  { title: "National & International Fellowships", icon: "fellowship", items: ["FICP, FACP, FIACM, FDIAI"] },
   { title: "Awards & Recognition", icon: "award", items: ["EDPA Championship Award"] },
 ];
 
@@ -34,13 +34,13 @@ export default function ClinicalJourney() {
           end: "center 55%", scrub: 0.5, invalidateOnRefresh: true }
       });
       el.querySelectorAll<HTMLElement>("[data-journey-card]").forEach((card) => {
-        gsap.fromTo(card, { y: 24, opacity: 0.35 }, { y: 0, opacity: 1, ease: "none", scrollTrigger: { trigger: card.parentElement || card, start: "top 95%", end: "top 65%", scrub: 0.5, invalidateOnRefresh: true } });
+        gsap.fromTo(card, { y: 14, opacity: 0.75 }, { y: 0, opacity: 1, ease: "none", scrollTrigger: { trigger: card.parentElement || card, start: "top 95%", end: "top 65%", scrub: 0.5, invalidateOnRefresh: true } });
       });
     });
     return () => { observer.disconnect(); mm.revert(); };
   }, []);
   return (
-    <ol className={styles.path} ref={root} aria-label="Clinical qualifications and achievements">
+    <ol className={styles.path} ref={root} aria-label="Medical qualifications and achievements">
       {groups.map((group, i) => (
         <li className={styles.stop} key={group.title}>
           {i === 0 && <span className={styles.line} data-journey-line aria-hidden="true" />}
@@ -51,9 +51,8 @@ export default function ClinicalJourney() {
       <li className={styles.stop}>
         <span className={`${styles.node} ${styles.finalNode}`} data-journey-final aria-hidden="true"><JourneyIcon kind="practice" /></span>
         <div className={`${styles.card} ${styles.practice}`} data-journey-card>
-          <h2>Current clinical practice</h2>
+          <h2>Current Clinical Practice</h2>
           <h3>Mediix Clinic, Indirapuram</h3>
-          <p>Consultant physician serving patients in Indirapuram, Ghaziabad.</p>
         </div>
       </li>
     </ol>

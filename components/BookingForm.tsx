@@ -66,7 +66,15 @@ export default function BookingForm({ onClose }: { onClose?: () => void }) {
           <li><Icon name="shield" size={18} /> Your details stay private</li>
         </ul>
         <svg className="trace" viewBox="0 0 300 60" aria-hidden="true"><path d="M0 35 Q20 5 40 30 T80 30 T120 12 T160 38 T200 22 T240 34 T300 18" /></svg>
-        <div className="bk-contact"><small>{locations[0].name}: {locations[0].phone}</small><small>{locations[0].timing}</small>
+        <div className="bk-contact"><small>{locations[0].name}: {locations[0].phone}</small><div className="booking-clinic-timings">
+  <small>
+    <strong>Mon–Sat:</strong> 12:30 PM – 3:00 PM &amp; 5:30 PM – 7:00 PM
+  </small>
+
+  <small>
+    <strong>Sun:</strong> 12:00 PM – 2:00 PM
+  </small>
+</div>
           <div className="bk-quick-actions"><a className="btn ghost dark" href={`tel:${site.phone}`}><Icon name="phone" size={16}/> Call clinic</a><a className="btn ghost dark" href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hello, I would like to enquire about an appointment with Dr. Susheel Tyagi.")}`} target="_blank" rel="noopener noreferrer"><Icon name="whatsapp" size={16}/> WhatsApp</a></div>
         </div>
       </aside>

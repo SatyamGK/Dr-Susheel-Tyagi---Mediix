@@ -1,22 +1,10 @@
 import type { Metadata } from "next";
-import BgSection from "@/components/BgSection";
-import SectionHead from "@/components/SectionHead";
 import InternalPageBanner from "@/components/InternalPageBanner";
 import CtaBand from "@/components/CtaBand";
+import Motion from "@/components/DedicatedPageMotion";
+import s from "@/components/DedicatedPages.module.css";
+import Icon from "@/components/Icon";
+import Image from "next/image";
 
-export const metadata: Metadata = { title: 'About Dr. Susheel Tyagi' , alternates: { canonical: "/about" } };
-
-export default function Page() {
-  return (
-    <>
-      <InternalPageBanner title="About Dr. Susheel Tyagi" />
-      <div className="internal-page-content">
-        <BgSection tone="white" id="about-dr-susheel" className="home-about-section">
-      <SectionHead kw="About Dr. Susheel Tyagi" title="A commitment to thoughtful medicine and better health" sub="Internal Medicine, patient awareness and continuity of care." />
-      <div className="about-home-preview"><p>Dr. Susheel Tyagi is a physician in Internal Medicine with a medical background from King George’s Medical University (KGMU). His professional interests span diabetes, hypertension, obesity, infectious diseases and metabolic disorders.</p><p>His approach centres on understanding the individual behind the condition through careful evaluation, informed clinical decisions, patient awareness and continuity of care.</p></div>
-    </BgSection>
-      </div>
-      <CtaBand locations={false} />
-    </>
-  );
-}
+export const metadata: Metadata = {title: 'About Dr. Susheel Tyagi', description: 'Learn about Dr. Susheel Tyagi’s medical background and approach to adult internal medicine.', alternates: {canonical: "/about"}};
+export default function Page() {return <><InternalPageBanner title={'About Dr. Susheel Tyagi'}/><Motion><section className={s.portrait}><div data-motion="tilt"><Image src="/images/doctor.png" alt="Dr. Susheel Tyagi" width={480} height={600}/></div><div><span className={s.eyebrow}>Consultant physician</span><h2>Medicine begins with understanding.</h2><p>Dr. Susheel Tyagi brings a background in Internal Medicine to the evaluation of adult health concerns, with a focus on diabetes and metabolic health.</p><p>His clinical practice is based at Mediix Clinic, Indirapuram.</p></div></section><section><h2>Professional foundation</h2><div className={s.timeline}><span className={s.progress} data-progress aria-hidden="true"/>{[['grad','Medical training','MBBS and MD (Medicine), KGMU, Lucknow.'],['book','Further education','PG Diploma in Clinical Endocrinology and Diabetes, Royal College of Physicians, UK.'],['award','Professional fellowships','FICP, FACP, FIACM, FDIAI.'],['award','Recognition','EDPA Championship Award.']].map(([icon,title,body])=><div data-motion="slide" key={title}><article className={s.card}><span className={s.icon}><Icon name={icon}/></span><h3>{title}</h3><p>{body}</p></article></div>)}</div></section><section><h2>What thoughtful care means</h2><div className={s.grid}>{[['Listen before evaluating','A patient’s account of symptoms, routines and concerns helps inform the clinical assessment.'],['Explain the reasoning','Discuss why an investigation or follow-up may be appropriate and encourage questions.'],['Consider the whole picture','Review related conditions and medicines rather than treating each concern in isolation.'],['Support informed decisions','Discuss prevention, monitoring and realistic follow-up needs.']].map(([title,body])=><div data-motion="tilt" key={title}><article className={s.card}><h3>{title}</h3><p>{body}</p></article></div>)}</div></section></Motion><CtaBand locations={false}/></>;}

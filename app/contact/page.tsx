@@ -1,22 +1,12 @@
 import type { Metadata } from "next";
-import LocationsBand from "@/components/LocationsBand";
 import InternalPageBanner from "@/components/InternalPageBanner";
 import CtaBand from "@/components/CtaBand";
+import Motion from "@/components/DedicatedPageMotion";
+import s from "@/components/DedicatedPages.module.css";
+import Icon from "@/components/Icon";
+import { locations, clinicMapEmbed } from "@/content/media";
+import { site } from "@/content/site";
+import { BookButton } from "@/components/Booking";
 
-export const metadata: Metadata = {
-  title: "Contact & Clinic Location | Dr. Susheel Tyagi",
-  description: "Visit Mediix Clinic at 14/3 Niti Khand-2, Indirapuram, Ghaziabad. Check OPD timings, directions, phone and WhatsApp contact details.",
-  alternates: { canonical: "/contact" },
-};
-
-export default function Page() {
-  return (
-    <>
-      <InternalPageBanner title="Contact" />
-      <div className="internal-page-content">
-        <LocationsBand />
-      </div>
-      <CtaBand locations={false} />
-    </>
-  );
-}
+export const metadata: Metadata = {title: 'Contact', description: 'Plan your visit to Mediix Clinic, Indirapuram, with clinic timings, directions and appointment options.', alternates: {canonical: "/contact"}};
+export default function Page() {return <><InternalPageBanner title={'Contact'}/><Motion><section className={s.intro}><span className={s.eyebrow}>Patient visit guide</span><h2>Plan your consultation with confidence.</h2><p>Contact the clinic to enquire about availability, confirm your visit and ask about any practical arrangements.</p><div className={s.actions}><a className={s.link} href="tel:+919625878756"><Icon name="phone"/>Call clinic</a><a className={s.link} href={'https://wa.me/'+site.whatsapp.replace(/\D/g,'')} target="_blank" rel="noopener noreferrer"><Icon name="whatsapp"/>WhatsApp</a><BookButton className={s.link}/></div></section><section data-motion="tilt"><article className={s.card}><span className={s.icon}><Icon name="pin"/></span><h2>Mediix Clinic</h2><p>{locations[0].address}</p><iframe className={s.map} title="Mediix Clinic location" src={clinicMapEmbed} loading="lazy" allowFullScreen referrerPolicy="no-referrer-when-downgrade"/><a className={s.link} href={locations[0].map} target="_blank" rel="noopener noreferrer">Get directions →</a></article></section><section className={s.grid}><div data-motion="slide"><article className={s.card}><span className={s.icon}><Icon name="clock"/></span><h3>Consultation hours</h3><p>Monday–Saturday<br/>12:30 PM–3:00 PM<br/>5:30 PM–7:00 PM</p><p>Sunday<br/>12:00 PM–2:00 PM</p><p>Confirm availability before travelling.</p></article></div><div data-motion="slide"><article className={s.card}><span className={s.icon}><Icon name="phone"/></span><h3>Appointment desk</h3><p><a href="tel:+919625878756">+91 96258 78756</a></p><p><a href="tel:+917303190200">+91 73031 90200</a></p><p>For hospital consultations at Yashoda Super Speciality Hospital or Avantika Hospital, confirm arrangements with the desk.</p></article></div></section><section><h2>Before you leave home</h2><div className={s.card}><ul><li>Confirm the clinic location and appointment availability.</li><li>Carry prescriptions, reports and relevant home readings.</li><li>Ask the clinic whether any specific preparation is needed.</li></ul><details><summary>Can I reschedule my visit?</summary><p>Contact the appointment desk to enquire about alternative timings.</p></details><details><summary>Should I fast before the consultation?</summary><p>Do not assume fasting is required. Confirm any test-specific instructions with the clinic.</p></details></div></section></Motion><CtaBand locations={false}/></>;}

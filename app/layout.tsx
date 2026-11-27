@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
@@ -36,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en"><body className={font.className}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      <Script src="https://mcp.figma.com/mcp/html-to-design/capture.js" strategy="afterInteractive" />
       <BookingProvider><a href="#content" className="skip-link">Skip to content</a><Header /><MotionDirector /><main id="content">{children}</main><Footer /><WhatsAppButton /></BookingProvider>
     </body></html>
   );
